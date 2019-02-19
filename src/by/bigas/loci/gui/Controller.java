@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -25,7 +25,7 @@ public class Controller implements Initializable {
     @FXML
     private TextArea questionTextArea;
     @FXML
-    private TextArea answerTextArea;
+    private TextField answerTextArea;
     @FXML
     private ImageView questionImage;
     @FXML
@@ -62,10 +62,17 @@ public class Controller implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-       this.answerTextArea.setVisible(true);
-       //this.gridForButtons.setVisible(false);
-
-        //this.answerTextArea.setManaged(false); // искл. из родит. вычислений
+       //this.answerTextArea.setVisible(true);
+       visibleButtonABCD(true); //Видны кнопки и невидно дефиниции(true), false - всё наоборот
+       /*this.answerTextArea.setOnAction(event -> {
+           resultText.setVisible(true);
+           resultText.setText("Вы тыкнули");
+       });
+       this.answerTextArea.setOnKeyPressed(event -> {
+           if(event.getCode() == KeyCode.ENTER){
+              this.AnswerSelected();
+           }
+       });*/
     }
 
 
@@ -92,14 +99,23 @@ public class Controller implements Initializable {
 
     public void variantDSelected(ActionEvent event)
     {
+        this.resultText.setVisible(true);
+        this.answerTextArea.setVisible(false);
+        this.resultText.setText("Ты нажал на кнопку D");
     }
 
-    public void AnswerSelected(ActionEvent event)
+    public void visibleButtonABCD(boolean v)
     {
-        this.variantA_Button.setVisible(true);
-        this.variantB_Button.setVisible(true);
-        this.variantC_Button.setVisible(true);
-        this.variantD_Button.setVisible(true);
-        this.answerTextArea.setText("Вы отаетили на вопрос");
+        this.variantA_Button.setVisible(v);
+        this.variantB_Button.setVisible(v);
+        this.variantC_Button.setVisible(v);
+        this.variantD_Button.setVisible(v);
+        this.answerTextArea.setVisible(!v);
+    }
+
+    public void answerSelected(ActionEvent event)
+    {
+        resultText.setVisible(true);
+        resultText.setText("Вы ответили на вопрос");
     }
 }
