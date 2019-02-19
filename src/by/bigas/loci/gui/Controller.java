@@ -25,7 +25,7 @@ public class Controller implements Initializable {
     @FXML
     private TextArea questionTextArea;
     @FXML
-    private TextField answerTextArea;
+    private TextField answerTextArea; // я изменил, чтобы немногострочной было поле
     @FXML
     private ImageView questionImage;
     @FXML
